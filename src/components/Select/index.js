@@ -9,7 +9,7 @@ const Select = (props) => {
     return (
         <div className='select-dropdown'>
             <label>{props.label}</label>
-            <select onChange={onChange}>
+            <select onChange={onChange} value={props.value}>
                 {props.items.map(item => <option key={item}>{item}</option>)}
             </select>
         </div>

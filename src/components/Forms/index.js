@@ -4,39 +4,35 @@ import Select from '../Select';
 import Button from '../Button';
 import { useState } from 'react';
 
-const Forms = (props) => {
-    const teams = [
-        'Dev',
-        'Front-End',
-        'Data Science',
-        'Devops',
-        'UX e Design',
-        'Mobile',
-    ]
-
+const Forms = ({ onSave, teams }) => {
     const [name, setName] = useState('')
-    const [role, setRole] = useState('')
+    const [position, setPosition] = useState('')
     const [image, setImage] = useState('')
     const [team, setTeam] = useState('')
 
     const save = (event) => {
         event.preventDefault()
-        props.onSave({
+        onSave({
             name,
-            role,
+            position,
             image,
             team
         })
+
+        setName('')
+        setPosition('')
+        setImage('')
+        setTeam(teams[0])
     }
 
     return (
         <section className='forms'>
             <form onSubmit={save}>
                 <h2>Fill the data to create the employee card:</h2>
-                <InputText onChange={valor => setName(valor)} required={true} label="Name" placeholder="Type your name" />
-                <InputText onChange={valor => setRole(valor)} required={true} label="Position" placeholder="Type your position" />
-                <InputText onChange={valor => setImage(valor)} required={true} label="Image" placeholder="Upload your picture" />
-                <Select onChange={valor => setTeam(valor)} items={teams} />
+                <InputText value={name} onChange={value => setName(value)} required={true} label="Name" placeholder="Type your name" />
+                <InputText value={position} onChange={value => setPosition(value)} required={true} label="Position" placeholder="Type your position" />
+                <InputText value={image} onChange={value => setImage(value)} required={true} label="Image" placeholder="Upload your picture" />
+                <Select value={team} onChange={value => setTeam(value)} items={teams} />
                 <Button>Save</Button>
             </form>
         </section>
